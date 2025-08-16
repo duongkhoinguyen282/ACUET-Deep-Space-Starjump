@@ -1,35 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>ACUET: Deep Space Starjump</title>
-<script>
-  const links = [
-    "https://www.facebook.com/AerospaceClubUET.ACUET",
-    "https://www.tiktok.com/@aerospace_club",
-    "https://imagine.gsfc.nasa.gov/hst_bday/",
-    "https://www3.nasa.gov/specials/hubble-adventure-app/",
-    "https://www3.nasa.gov/specials/hubble-hearing-app/",
-    "https://www3.nasa.gov/specials/hubble-nebula-game/",
-    "https://spacetelescopelive.org/",
-    "https://science.nasa.gov/mission/hubble/multimedia/online-activities/interactive-orbiting-hubble/",
-    "https://eyes.nasa.gov/apps/solar-system/#/home",
-    "https://eyes.nasa.gov/apps/mars2020/#/home",
-    "https://eyes.nasa.gov/apps/asteroids/#/watch/",
-    "https://eyes.nasa.gov/apps/earth/#/",
-    "https://eyes.nasa.gov/apps/exo/#/earth",
-    "https://www3.nasa.gov/skymap/full/",
-    "https://stellarium-web.org/",
-    "https://neal.fun/asteroid-launcher/",
-    "https://science.nasa.gov/3d-resources/"
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ACUET: Deep Space Starjump</title>
+    <link rel="Icon" href="logo.png" type="png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  ];
+  <body>
+    <div class="container">
+      <!-- Cảnh 1 -->
+      <section class="scene scene-1">
+        <canvas id="rainCanvas"></canvas>
+        <canvas class="canvas" width="1820" height="905"></canvas>
+        <p class="text" style="color: #ffffff">
+          ACUET – <span id="span_dt_dt"></span> liên tục trên quỹ đạo 🚀
+        </p>
+      </section>
 
-  const randomLink = links[Math.floor(Math.random() * links.length)];
-  window.location.href = randomLink;
-</script>
-</head>
-<body>
-  <p>Đang chuyển hướng...</p>
-</body>
+      <!-- Cảnh 2 -->
+      <section class="scene scene-2">
+        <div class="starjump-panel">
+          <div class="msg-container">
+            <div class="overlay"></div>
+            <div class="content clearfix">
+              <header class="site clearfix">
+                <div class="col one">
+                  <img
+                    src="terminal-logo.png"
+                    alt="591 Systems"
+                    width="740"
+                    height="729"
+                    id="logo-v"
+                  />
+                </div>
+                <div class="col two">
+                  <h4>
+                    AeroSpace Club UET
+                    <br />
+                    <b>P</b>roject: <b>D</b>eep <b>S</b>pace <b>S</b>tarjump
+                    🔮🌠🛸
+                  </h4>
+                  <p>-----------------------------------------------------</p>
+                  <p>⋆⭒˚.⋆ Mission Log – 2025.08.24 ⋆⭒˚.⋆</p>
+                  <p>
+                    >> Tàu <b>ACUET-F6</b> gửi về tọa độ nhảy lượng tử lạ...
+                  </p>
+                  <p>>> Liên tục biến mất & xuất hiện ở một vùng sao khác</p>
+                </div>
+              </header>
+
+              <p>
+                >> Hội đồng hoa tiêu gọi hiện tượng này là: <b>Starjump</b>🪐
+              </p>
+              <p>>> Nguyên nhân chọn đích đến ngẫu nhiên vẫn là ẩn số</p>
+              <p>
+                >> Có giả thuyết cho rằng nó “nghe” theo tiếng gọi của vũ trụ
+              </p>
+
+              <p>
+                >> <a>Cảnh báo!</a> Điểm đến có thể là thiên đường sao hay rìa
+                hố đen
+              </p>
+              <br />
+
+              <p><b>Các điểm đến tiềm năng</b></p>
+              <p>>> Dải ngân hà & ISS 🛰</p>
+              <p>>> Mô phỏng thiên thạch va chạm Trái Đất 💥</p>
+              <p>>> Các nhiệm vụ thú vị đang chờ bạn hoàn thành 🎮</p>
+            </div>
+
+            <div id="activate-btn">
+              <img src="spaceship-btn.png" id="spaceship-btn" />
+              <img src="spaceship-flame.png" id="spaceship-flame">
+              <p class="activate-text">ACTIVATE STARJUMP</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- nền 3D nằm sau panel -->
+        <div id="space-container"></div>
+      </section>
+    </div>
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1037366/three.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1037366/CanvasRenderer.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1037366/Projector.js"></script>
+    <script src="script.js"></script>
+
+    <div>
+      <audio autoplay loop>
+        <source src="bg_music.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <script>
+      const activateBtn = document.getElementById("activate-btn");
+
+      const links = [
+        "https://www.facebook.com/AerospaceClubUET.ACUET",
+        "https://www.tiktok.com/@aerospace_club",
+        "https://imagine.gsfc.nasa.gov/hst_bday/",
+        "https://www3.nasa.gov/specials/hubble-adventure-app/",
+        "https://www3.nasa.gov/specials/hubble-hearing-app/",
+        "https://www3.nasa.gov/specials/hubble-nebula-game/",
+        "https://spacetelescopelive.org/",
+        "https://science.nasa.gov/mission/hubble/multimedia/online-activities/interactive-orbiting-hubble/",
+        "https://eyes.nasa.gov/apps/solar-system/#/home",
+        "https://eyes.nasa.gov/apps/mars2020/#/home",
+        "https://eyes.nasa.gov/apps/asteroids/#/watch/",
+        "https://eyes.nasa.gov/apps/earth/#/",
+        "https://eyes.nasa.gov/apps/exo/#/earth",
+        "https://www3.nasa.gov/skymap/full/",
+        "https://stellarium-web.org/",
+        "https://neal.fun/asteroid-launcher/",
+        "https://science.nasa.gov/3d-resources/"
+
+      ];
+      activateBtn.addEventListener("click", () => {
+        const randomIndex = Math.floor(Math.random() * links.length);
+        const randomLink = links[randomIndex];
+        window.location.href = randomLink; // chuyển hướng
+      });
+    </script>
+  </body>
 </html>

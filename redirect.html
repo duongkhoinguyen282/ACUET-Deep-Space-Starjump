@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ACUET: Deep Space Starjump</title>
+    <link rel="Icon" href="logo.png" type="png" />
+    <script>
+      const links = [
+        "https://www.facebook.com/AerospaceClubUET.ACUET",
+        "https://www.tiktok.com/@aerospace_club",
+        "https://imagine.gsfc.nasa.gov/hst_bday/",
+        "https://www3.nasa.gov/specials/hubble-adventure-app/",
+        "https://www3.nasa.gov/specials/hubble-hearing-app/",
+        "https://www3.nasa.gov/specials/hubble-nebula-game/",
+        "https://spacetelescopelive.org/",
+        "https://science.nasa.gov/mission/hubble/multimedia/online-activities/interactive-orbiting-hubble/",
+        "https://eyes.nasa.gov/apps/solar-system/#/home",
+        "https://eyes.nasa.gov/apps/mars2020/#/home",
+        "https://eyes.nasa.gov/apps/asteroids/#/watch/",
+        "https://eyes.nasa.gov/apps/earth/#/",
+        "https://eyes.nasa.gov/apps/exo/#/earth",
+        "https://www3.nasa.gov/skymap/full/",
+        "https://stellarium-web.org/",
+        "https://neal.fun/asteroid-launcher/",
+        "https://science.nasa.gov/3d-resources/"
+
+      ];
+
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      <!-- window.location.href = randomLink; -->
+    </script>
+    <style>
+/* Container của nút + chữ */
+.rocket-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 5;
+}
+
+/* Chữ CLICK */
+.rocket-label {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  margin-bottom: 12px;
+  font-family: sans-serif;
+}
+
+/* Nút rocket */
+.rocket-btn {
+  position: relative;
+  display: inline-block;
+  width: 160px;
+  height: 80px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* rocket ngang */
+.rocket {
+  display: block;
+  transition: transform 220ms ease, filter 220ms ease;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+  transform-origin: 70% 50%; /* xoay quanh gần đuôi */
+}
+
+/* flame ngang */
+.flame {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0;
+}
+.flame::before, .flame::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+  width: 100%; height: 100%;
+  border-radius: 60% 60% 50% 50%;
+  filter: blur(1px);
+  will-change: transform, opacity;
+}
+/* lõi vàng */
+.flame::before {
+  background: radial-gradient(circle at 0% 50%,
+    rgba(255,230,100,1) 0%,
+    rgba(255,170,0,1) 45%,
+    rgba(255,140,0,0.9) 70%,
+    rgba(255,80,0,0) 100%);
+  animation: flameCore 120ms infinite alternate;
+}
+/* hào quang đỏ cam */
+.flame::after {
+  background: radial-gradient(circle at 0% 50%,
+    rgba(255,140,0,0.8) 0%,
+    rgba(255,80,0,0.6) 50%,
+    rgba(255,0,0,0) 100%);
+  transform-origin: 0% 50%;
+  animation: flameGlow 160ms infinite alternate;
+}
+
+@keyframes flameCore {
+  from { transform: translateY(-50%) scaleX(1) translateX(0px); opacity: .95; }
+  to   { transform: translateY(-50%) scaleX(1.25) translateX(6px); opacity: .75; }
+}
+@keyframes flameGlow {
+  from { transform: translateY(-50%) scale(1) translateX(0px); opacity: .7; }
+  to   { transform: translateY(-50%) scale(1.35) translateX(10px); opacity: .45; }
+}
+
+/* Hover: nghiêng lên 30° và bật flame */
+.rocket-btn:hover .rocket,
+.rocket-btn:focus-visible .rocket {
+  transform: rotate(-30deg);
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.45));
+}
+.rocket-btn:hover .flame,
+.rocket-btn:focus-visible .flame {
+  opacity: 1;
+}
+
+/* Mobile: chạm giữ cũng hiện flame */
+@media (hover:none) {
+  .rocket-btn:active .rocket { transform: rotate(-25deg); }
+  .rocket-btn:active .flame { opacity: 1; }
+}
+    </style>
+  </head>
+  <body>
+    <p>Đang chuyển hướng...</p>
+      <div class="rocket-wrapper">
+    <div class="rocket-label">CLICK</div>
+    <button class="rocket-btn" id="rocketBtn" aria-label="Launch">
+      <!-- SVG rocket ngang -->
+      <svg viewBox="0 0 64 64" class="rocket" width="160" height="80" aria-hidden="true">
+        <!-- thân -->
+        <path d="M2 32c4-8 16-14 28-14 4 0 8 1 12 2l12 12-12 12c-4 1-8 2-12 2-12 0-24-6-28-14z" fill="#cbd5e1"/>
+        <!-- cửa sổ -->
+        <circle cx="22" cy="32" r="6" fill="#1e293b"/>
+        <!-- cánh trên -->
+        <path d="M34 20l6-10-2 14z" fill="#94a3b8"/>
+        <!-- cánh dưới -->
+        <path d="M34 44l6 10-2-14z" fill="#94a3b8"/>
+        <!-- đuôi -->
+        <rect x="46" y="29" width="8" height="6" rx="2" fill="#64748b"/>
+      </svg>
+      <!-- flame -->
+      <span class="flame" aria-hidden="true"></span>
+    </button>
+    
+    <audio id="bgm" autoplay loop preload="auto">
+      <source src="bg_music.mp3" type="audio/mpeg" />
+      Trình duyệt của bạn không hỗ trợ audio.
+    </audio>
+  </body>
+</html>

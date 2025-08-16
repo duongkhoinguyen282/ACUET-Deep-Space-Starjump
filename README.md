@@ -3,7 +3,7 @@
 > **Mission Log – 2020.10.09**  
 > Tín hiệu cuối cùng từ tàu *ACUET-F6* ghi lại chuỗi tọa độ nhảy lượng tử không xác định.  
 > Mỗi lần kích hoạt, con tàu biến mất khỏi không gian hiện tại và xuất hiện ở một vùng sao khác… 
-> Bộ định vị gọi hiện tượng này là: **Starjump**.  
+> Hội đồng hoa tiêu gọi hiện tượng này là: **Starjump**.  
 > 
 > Các nhà khoa học vẫn chưa lý giải được tại sao cơ chế điều hướng lại chọn đích đến ngẫu nhiên.  
 > Có giả thuyết cho rằng nó “nghe” theo tiếng gọi của vũ trụ.  
@@ -19,14 +19,16 @@
 
 💥 Mô phỏng thiên thạch va chạm Trái Đất
 
-🛰  Hệ mặt trời & ISS
+🛰  Dải ngân hà & ISS
 
 🎮 Các nhiệm vụ thú vị đang chờ bạn hoàn thành
 
 ---
 
 ## 🛠 Cách vận hành
-1. Quét QR hoặc sử dụng [link](google.com) → Kích hoạt **Starjump**
-2. Bộ điều hướng chọn ngẫu nhiên một tọa độ từ cơ sở dữ liệu
+1. Quét QR ở bên dưới hoặc sử dụng [link](https://duongkhoinguyen282.github.io/ACUET-Deep-Space-Starjump/) để Kích hoạt **Starjump**
+2. Bộ điều hướng chọn ngẫu nhiên một tọa độ
 3. Bạn được có một **cú nhảy Alpha** tới **một trải nghiệm vũ trụ bất ngờ** 🎁
+
+![ACUET Deep Space Starjump QR Code](DSS-qr-code.png)
 

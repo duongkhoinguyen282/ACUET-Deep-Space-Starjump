@@ -1,0 +1,382 @@
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma,
+    "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+  background: #79a8ae;
+  color: #cfebe4;
+  font-size: 18px;
+  line-height: 2;
+  letter-spacing: 1.2px;
+  margin: 0;
+  min-height: 110vh;
+  overflow: hidden;
+}
+.body--ready {
+  background: -webkit-linear-gradient(
+    top,
+    rgb(203, 235, 219) 0%,
+    rgb(55, 148, 192) 120%
+  );
+  background: -moz-linear-gradient(
+    top,
+    rgb(203, 235, 219) 0%,
+    rgb(55, 148, 192) 120%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgb(203, 235, 219) 0%,
+    rgb(55, 148, 192) 120%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgb(203, 235, 219) 0%,
+    rgb(55, 148, 192) 120%
+  );
+  background: linear-gradient(
+    top,
+    rgb(203, 235, 219) 0%,
+    rgb(55, 148, 192) 120%
+  );
+}
+.text {
+  position: fixed;
+  bottom: 100px;
+  text-align: center;
+  width: 100%;
+}
+/* --- NỀN & LỚP TRÊN --- */
+#rainCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none; /* để cuộn xuyên qua */
+}
+
+.canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* canh giữa chuẩn */
+  z-index: 1;
+}
+
+.text {
+  position: fixed;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
+
+.text-right {
+  position: fixed;
+  bottom: 50px;
+  text-align: right;
+  width: 100%;
+  font-weight: bold;
+}
+
+/* --- CONTAINER 2 SCENE --- */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Firefox ẩn thanh cuộn */
+}
+.container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari ẩn thanh cuộn */
+}
+
+.scene {
+  height: 100vh;
+  scroll-snap-align: start;
+}
+
+/* Nền cảnh 2 */
+/* đảm bảo scene-2 làm nền cho 3D và panel */
+.scene-2 {
+  position: relative;
+  background: #000;
+
+  cursor: grab;
+}
+.scene-2 #space-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* 3D background */
+}
+
+.scene-2:active {
+  cursor: grabbing;
+}
+
+/* ===== STARJUMP PANEL (scoped) ===== */
+.scene-2 .starjump-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 10; /* nổi trên 3D */
+  pointer-events: none; /* cho 3D vẫn nhận drag nếu cần */
+
+  line-height: 32px;
+  letter-spacing: 0;
+}
+.scene-2 .starjump-panel * {
+  pointer-events: auto;
+} /* nhưng panel vẫn click được */
+
+@keyframes flicker {
+		0% { opacity: 0.15795 }
+		5% { opacity: 0.31511 }
+		10% { opacity: 0.94554 }
+		15% { opacity: 0.2469 }
+		20% { opacity: 0.62031 }
+		25% { opacity: 0.0293 }
+		30% { opacity: 0.00899 }
+		35% { opacity: 0.5344 }
+		40% { opacity: 0.12778 }
+		45% { opacity: 0.52042 }
+		50% { opacity: 0.3823 }
+		55% { opacity: 0.2198 }
+		60% { opacity: 0.9383 }
+		65% { opacity: 0.86615 }
+		70% { opacity: 0.68695 }
+		75% { opacity: 0.55749 }
+		80% { opacity: 0.96984 }
+		85% { opacity: 0.0361 }
+		90% { opacity: 0.24467 }
+		95% { opacity: 0.08351 }
+		100% { opacity: 0.54813 }
+	}
+
+.scene-2 h4 { 
+	font-weight: normal;
+	margin: 0;
+	text-transform: uppercase;
+}
+.scene-2 h4 b {
+  color: white;
+}
+
+.scene-2 p { 
+	line-height: 100%;
+	margin: 0; 
+}
+
+.scene-2 p a {
+  color: red;
+}
+
+.scene-2 p b {
+  color: white;
+}
+
+.scene-2 header.site {
+	margin: 0 0 40px 0;
+	text-transform: uppercase;
+}
+
+.scene-2 .overlay {
+	height: calc(100% + 8px);
+	position: absolute;
+	top: -4px;
+	left: -4px;
+	width: calc(100% + 8px);
+	border-radius: 15px;
+}
+
+.scene-2 .overlay:before {
+	background: linear-gradient(rgba(1, 137, 220, 0.45) 50%, rgba(22, 22, 22, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
+	background-size: 100% 3px, 6px 100%;
+	content: "";
+	display: block;
+	pointer-events: none;
+	position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	z-index: 2;
+}
+	
+.scene-2 .overlay:after {
+	animation: flicker 0.30s infinite;
+	background: rgba(57, 57, 57, 0.2);
+	content: "";
+	display: block;
+	pointer-events: none;
+	position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	z-index: 2;
+}
+
+.scene-2 .col {
+	float: left;
+	padding: 0 20px;
+}
+
+.scene-2 .col.two { width: auto; }
+
+.scene-2 .msg-container {
+  margin: 12vh 15vw;
+  overflow: hidden;
+  padding: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 70vw;
+  height: 75vh;
+  border: 4px solid rgb(1, 137, 220);
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 0 10px 2px rgba(1, 137, 220, 0.7),
+              0 0 20px 5px rgba(1, 137, 220, 0.5);
+  animation: pulse 2s infinite alternate;
+
+  color: #00dd00;
+	font-size: 32px;
+	font-family: 'VT323', Courier;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 10px 2px rgba(1, 137, 220, 0.7),
+                0 0 20px 5px rgba(1, 137, 220, 0.5);
+  }
+  to {
+    box-shadow: 0 0 15px 4px rgba(1, 137, 220, 0.9),
+                0 0 30px 10px rgba(1, 137, 220, 0.7);
+  }
+}
+
+.scene-2 .content { 
+  overflow: hidden;
+	padding: 20px 0 0 40px; 
+	position: relative;
+	width: 95%;
+}
+
+.scene-2 #logo-v {
+	display: block;
+	height: auto;
+	margin: 0 auto;
+	width: 200px;
+}
+
+.scene-2 .clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.scene-2 .upper { text-transform: uppercase; }
+
+.scene-2 #spaceship-btn {
+  width: 240px;
+  height: auto;
+  position: absolute;
+
+  filter: drop-shadow(0 0 5px gold) 
+          drop-shadow(0 0 10px gold) 
+}
+
+.scene-2 #activate-btn {
+  width: 240px;
+  height: 150px;
+  position: absolute;
+  /* border: 4px solid red; */
+  right: 3vw;
+  bottom: 4vh;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.scene-2 #activate-btn:hover {
+  rotate: -20deg;
+}
+
+.scene-2 #activate-btn:hover #spaceship-btn {
+    filter: drop-shadow(0 0 5px gold) 
+            drop-shadow(0 0 10px gold)
+            drop-shadow(0 0 15px gold); 
+}
+
+.scene-2 .activate-text {
+  font-family: 'VT323', Courier;
+  color: #00dd00;
+  text-align: center;
+  font-size: 1.2em;
+  margin: 0;
+  z-index: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0, 221, 0, 0.7);
+}
+
+.scene-2 #activate-btn:hover .activate-text {
+  text-shadow: 0 0 10px #00dd00, 0 0 20px #00dd00;
+}
+
+#spaceship-flame{
+  position: absolute;
+  width: 100px;
+  height: auto;
+  margin-left: -90px;
+  visibility: hidden;
+}
+
+#activate-btn:hover #spaceship-flame {
+  visibility: visible;
+  filter: drop-shadow(0 0 5px orange)
+          drop-shadow(0 0 10px orange)
+          drop-shadow(0 0 15px orange);  
+  transform-origin: right;
+  transform: translateY(100px);
+  animation: flame 200ms infinite alternate;
+}
+
+@keyframes flame {
+  from { transform: translateY(0%) scale(0.9) translateX(0px); opacity: 1; }
+  to   { transform: translateY(3.64px) scale(1) translateX(-10px); opacity: 0.8; }
+}
+
+/* --- FADE HAI CHIỀU (show & hide) --- */
+#rainCanvas,
+.canvas,
+.text,
+.text-right {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms ease, visibility 0s linear 0s; /* hiện: visible ngay, rồi fade */
+  will-change: opacity;
+}
+
+body.scrolled #rainCanvas,
+body.scrolled .canvas,
+body.scrolled .text,
+body.scrolled .text-right {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease, visibility 0s linear 400ms; /* ẩn: đợi 400ms mới hidden */
+  pointer-events: none;
+}
