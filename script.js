@@ -56,7 +56,7 @@ var S = {
     S.Drawing.init(".canvas");
     document.body.classList.add("body--ready");
     S.UI.simulate(
-      "DEEP|SPACE|STARJUMP|WITH|ACUET|💫|🚀|❤️|SCROLL DOWN FOR MORE"
+      "DEEP SPACE|STARJUMP|WITH|ACUET|💫|🚀|SCROLL DOWN FOR MORE"
     );
     S.Drawing.loop(function () {
       S.Shape.render();
@@ -210,7 +210,7 @@ S.UI = (function () {
                   time = t;
                   S.Shape.switchShape(S.ShapeBuilder.letter(time));
                 }
-              }, 1000);
+              }, 500);
             }
             break;
           default:
@@ -219,7 +219,7 @@ S.UI = (function () {
             );
         }
       },
-      2000, // Time between each word
+      1800, // Time between each word
       sequence.length
     );
   }
